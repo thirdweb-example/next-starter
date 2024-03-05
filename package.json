@@ -12,7 +12,7 @@
 		"react": "^18",
 		"react-dom": "^18",
 		"next": "14.1.0",
-		"thirdweb": "0.0.0-dev-7fe399a8a6ea5cd6bd004cb57b618f671d1d46cc-20240305202703"
+		"thirdweb": "0.0.0-dev-0f17b837ee0d56948590502df486bc259d7855c7-20240305220636"
 	},
 	"devDependencies": {
 		"typescript": "^5",
