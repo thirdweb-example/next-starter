@@ -44,6 +44,7 @@ export default function Home() {
 					<Category title='Videos' medias={medias.videos} />
 					<Category title='Images' medias={medias.images} />
 					<Category title='Audio' medias={medias.audio} />
+					<Category title='3D Model' medias={medias.model} />
 					<Category title='HTML' medias={medias.html} />
 					<Category title='Others' medias={medias.others} />
 				</div>
