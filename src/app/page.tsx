@@ -39,7 +39,10 @@ export default function Home() {
 	return (
 		<main className='p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto'>
 			<div className='py-20'>
-				<h1 className='text-8xl mb-12 font-semibold tracking-tighter'> MediaRenderer </h1>
+				<h1 className='text-5xl xl:text-8xl mb-12 font-semibold tracking-tighter'>
+					{' '}
+					MediaRenderer{' '}
+				</h1>
 				<div className='flex flex-col gap-20'>
 					<Category title='Videos' medias={medias.videos} />
 					<Category title='Images' medias={medias.images} />
@@ -56,7 +59,7 @@ export default function Home() {
 function Category(props: { title: string; medias: string[] }) {
 	return (
 		<div>
-			<h2 className='text-7xl my-10 font-semibold tracking-tighter'> {props.title} </h2>
+			<h2 className='text-4xl md:text-7xl my-10 font-semibold tracking-tighter'> {props.title} </h2>
 			<div className='grid md:grid-cols-2 xl:grid-cols-3 gap-6'>
 				{props.medias.map(mediaUrl => {
 					const split = mediaUrl.split('.');
@@ -70,12 +73,14 @@ function Category(props: { title: string; medias: string[] }) {
 							}}
 						>
 							<p className='mb-6 font-medium text-2xl text-zinc-400'>{extension}</p>
-							<MediaRenderer
-								src={mediaUrl}
-								className='!rounded-lg !overflow-hidden'
-								width='250px'
-								height='250px'
-							/>
+							<div className='flex justify-center'>
+								<MediaRenderer
+									src={mediaUrl}
+									className='!rounded-lg !overflow-hidden'
+									width='250px'
+									height='250px'
+								/>
+							</div>
 						</div>
 					);
 				})}
