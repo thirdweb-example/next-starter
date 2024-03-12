@@ -4849,10 +4849,10 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-thirdweb@0.0.0-dev-63a132582b68b8dee8693ec6f3abd67de5cdcc24-20240312214343:
-  version "0.0.0-dev-63a132582b68b8dee8693ec6f3abd67de5cdcc24-20240312214343"
-  resolved "https://registry.yarnpkg.com/thirdweb/-/thirdweb-0.0.0-dev-63a132582b68b8dee8693ec6f3abd67de5cdcc24-20240312214343.tgz#ae68e6e45eb009db49b7451e44285b91ac4acb3d"
-  integrity sha512-gA/IgAYpJ5owU82I5+PzoCDwUyiCeUfohA2tY9KX1JGHsMEX6M14UxSAhy21Jb2/j0xgbc+i4KX2oVyDGVDPuw==
+thirdweb@0.0.0-dev-0a7416327e1daad21f5880a97d462dc3f3e52d46-20240312221053:
+  version "0.0.0-dev-0a7416327e1daad21f5880a97d462dc3f3e52d46-20240312221053"
+  resolved "https://registry.yarnpkg.com/thirdweb/-/thirdweb-0.0.0-dev-0a7416327e1daad21f5880a97d462dc3f3e52d46-20240312221053.tgz#36c35a7d32aab4474304daa2922f6398f528a881"
+  integrity sha512-F7RxGF2LTGU0gCBeup95gWl7OjXhicPxS0h06ASklzhiEWyntfgzz8lAMtHRK+YUNNKC+R8Xf80I27/1SX233w==
   dependencies:
     "@coinbase/wallet-sdk" "3.7.2"
     "@emotion/react" "11.11.4"
