@@ -5,12 +5,12 @@ import { ConnectButton, ThirdwebProvider } from '@/app/thirdweb';
 import thirdwebIcon from '@public/thirdweb.svg';
 import { useState, useEffect, useCallback } from 'react';
 import { createThirdwebClient } from 'thirdweb';
-import { setThirdwebDomainOverrides } from 'thirdweb/utils';
+import { setThirdwebDomains } from 'thirdweb/utils';
 
 export default function Home() {
 	// dev true by default
 	const [isDevClient, setIsDevClient] = useState(true);
-	const [clientId, setClientId] = useState('bbe3b2ee75e8ea77d0605a80d67456a4');
+	const [clientId, setClientId] = useState('48812987432f90bb6bd9f9f1effda872');
 
 	const client = createThirdwebClient({
 		clientId: clientId,
@@ -19,13 +19,13 @@ export default function Home() {
 	const updateClient = useCallback((_isDevClient: boolean) => {
 		if (_isDevClient) {
 			setClientId('bbe3b2ee75e8ea77d0605a80d67456a4');
-			setThirdwebDomainOverrides({
-				pay: 'interstate.thirdweb-dev.com',
+			setThirdwebDomains({
+				pay: 'pay.thirdweb-dev.com',
 				rpc: 'rpc.thirdweb-dev.com',
 			});
 		} else {
 			setClientId('92bb0cd9e9055de30502c1501dc8c2fe');
-			setThirdwebDomainOverrides({
+			setThirdwebDomains({
 				pay: 'interstate.thirdweb.com',
 				rpc: 'rpc.thirdweb.com',
 			});
