@@ -18,7 +18,7 @@ export default function Home() {
 
 	const updateClient = useCallback((_isDevClient: boolean) => {
 		if (_isDevClient) {
-			setClientId('bbe3b2ee75e8ea77d0605a80d67456a4');
+			setClientId('48812987432f90bb6bd9f9f1effda872');
 			setThirdwebDomains({
 				pay: 'pay.thirdweb-dev.com',
 				rpc: 'rpc.thirdweb-dev.com',
