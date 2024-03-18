@@ -7,24 +7,27 @@ import { useState, useEffect, useCallback } from 'react';
 import { createThirdwebClient } from 'thirdweb';
 import { setThirdwebDomains } from 'thirdweb/utils';
 
+const devClientID = '48812987432f90bb6bd9f9f1effda872';
+const prodClientID = '92bb0cd9e9055de30502c1501dc8c2fe';
+
 export default function Home() {
 	// dev true by default
 	const [isDevClient, setIsDevClient] = useState(true);
-	const [clientId, setClientId] = useState('48812987432f90bb6bd9f9f1effda872');
+	const [clientId, setClientId] = useState(devClientID);
 
 	const client = createThirdwebClient({
-		clientId: clientId,
+		clientId: clientId || (isDevClient ? devClientID : prodClientID),
 	});
 
 	const updateClient = useCallback((_isDevClient: boolean) => {
 		if (_isDevClient) {
-			setClientId('48812987432f90bb6bd9f9f1effda872');
+			setClientId(devClientID);
 			setThirdwebDomains({
 				pay: 'pay.thirdweb-dev.com',
 				rpc: 'rpc.thirdweb-dev.com',
 			});
 		} else {
-			setClientId('92bb0cd9e9055de30502c1501dc8c2fe');
+			setClientId(prodClientID);
 			setThirdwebDomains({
 				pay: 'interstate.thirdweb.com',
 				rpc: 'rpc.thirdweb.com',
