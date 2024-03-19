@@ -29,7 +29,7 @@ export default function Home() {
 		} else {
 			setClientId(prodClientID);
 			setThirdwebDomains({
-				pay: 'interstate.thirdweb.com',
+				pay: 'pay.thirdweb.com',
 				rpc: 'rpc.thirdweb.com',
 			});
 		}
