@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ConnectButton, ThirdwebProvider } from '@/app/thirdweb';
 import thirdwebIcon from '@public/thirdweb.svg';
 import { useState, useEffect, useCallback } from 'react';
-import { createThirdwebClient } from 'thirdweb';
+import { createThirdwebClient, defineChain } from 'thirdweb';
 import { setThirdwebDomains } from 'thirdweb/utils';
 
 const devClientID = '48812987432f90bb6bd9f9f1effda872';
@@ -76,7 +76,7 @@ export default function Home() {
 					</div>
 
 					<div className='flex justify-center mb-20 mt-10'>
-						<ConnectButton />
+						<ConnectButton chains={[1, 10, 137, 8453, 42161, 43114].map(defineChain)} />
 					</div>
 
 					<ThirdwebResources />
