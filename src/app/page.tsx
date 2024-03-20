@@ -1,20 +1,88 @@
+'use client';
+
 import Image from 'next/image';
-import { ConnectButton } from '@/app/thirdweb';
+import { ConnectButton, ThirdwebProvider } from '@/app/thirdweb';
 import thirdwebIcon from '@public/thirdweb.svg';
+import { useState, useEffect, useCallback } from 'react';
+import { createThirdwebClient, defineChain } from 'thirdweb';
+import { setThirdwebDomains } from 'thirdweb/utils';
+
+const devClientID = '48812987432f90bb6bd9f9f1effda872';
+const prodClientID = '1119b624529e89514e1c40c700af849c';
 
 export default function Home() {
+	// dev true by default
+	const [isDevClient, setIsDevClient] = useState(true);
+	const [clientId, setClientId] = useState(devClientID);
+
+	const client = createThirdwebClient({
+		clientId: clientId || (isDevClient ? devClientID : prodClientID),
+	});
+
+	const updateClient = useCallback((_isDevClient: boolean) => {
+		if (_isDevClient) {
+			setClientId(devClientID);
+			setThirdwebDomains({
+				pay: 'pay.thirdweb-dev.com',
+				rpc: 'rpc.thirdweb-dev.com',
+			});
+		} else {
+			setClientId(prodClientID);
+			setThirdwebDomains({
+				pay: 'pay.thirdweb.com',
+				rpc: 'rpc.thirdweb.com',
+			});
+		}
+	}, []);
+
+	useEffect(() => {
+		updateClient(isDevClient);
+	}, [isDevClient, updateClient]);
+
 	return (
-		<main className='p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto'>
-			<div className='py-20'>
-				<Header />
+		<ThirdwebProvider client={client}>
+			<main className='p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto'>
+				<div className='py-20'>
+					<Header />
 
-				<div className='flex justify-center mb-20'>
-					<ConnectButton />
+					<div className='flex items-center p-4 flex-col gap-3 max-w-screen-lg m-auto'>
+						<label htmlFor='client-id' className='text-zinc-300'>
+							Client ID
+						</label>
+
+						<div>
+							<label htmlFor='dev'> is Dev? </label>
+							<input
+								id='dev'
+								checked={isDevClient}
+								type='checkbox'
+								onChange={e => {
+									const isDev = e.target.checked;
+									setIsDevClient(isDev);
+									updateClient(isDev);
+								}}
+							/>
+						</div>
+
+						<input
+							id='client-id'
+							type='text'
+							value={clientId}
+							onChange={e => {
+								setClientId(e.target.value);
+							}}
+							className='bg-zinc-900 border text-sm p-3 rounded-lg w-[400px] border-zinc-800 text-zinc-100 text-center'
+						/>
+					</div>
+
+					<div className='flex justify-center mb-20 mt-10'>
+						<ConnectButton chains={[1, 10, 137, 8453, 42161, 43114].map(defineChain)} />
+					</div>
+
+					<ThirdwebResources />
 				</div>
-
-				<ThirdwebResources />
-			</div>
-		</main>
+			</main>
+		</ThirdwebProvider>
 	);
 }
 
