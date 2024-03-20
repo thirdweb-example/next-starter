@@ -8,7 +8,7 @@ import { createThirdwebClient } from 'thirdweb';
 import { setThirdwebDomains } from 'thirdweb/utils';
 
 const devClientID = '48812987432f90bb6bd9f9f1effda872';
-const prodClientID = '92bb0cd9e9055de30502c1501dc8c2fe';
+const prodClientID = '1119b624529e89514e1c40c700af849c';
 
 export default function Home() {
 	// dev true by default
