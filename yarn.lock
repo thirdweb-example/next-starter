@@ -5335,10 +5335,10 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-thirdweb@0.0.0-dev-210c8de7c6b6b9c372cbfea449fc11cd76413168-20240320001036:
-  version "0.0.0-dev-210c8de7c6b6b9c372cbfea449fc11cd76413168-20240320001036"
-  resolved "https://registry.yarnpkg.com/thirdweb/-/thirdweb-0.0.0-dev-210c8de7c6b6b9c372cbfea449fc11cd76413168-20240320001036.tgz#548b21ac020ee1c084311725bc097a6337f99542"
-  integrity sha512-okdF3e4fQ36WdvrWpxMeallxeW/+MeoRtIMQi5gCGya+Qt59G2/tlnyfQxgrtnD+x9dwmJPda0uYtlkwUOgRuA==
+thirdweb@0.0.0-dev-eab40eb35b1d195b3622734c0a88d071d30bef1b-20240320170958:
+  version "0.0.0-dev-eab40eb35b1d195b3622734c0a88d071d30bef1b-20240320170958"
+  resolved "https://registry.yarnpkg.com/thirdweb/-/thirdweb-0.0.0-dev-eab40eb35b1d195b3622734c0a88d071d30bef1b-20240320170958.tgz#a951d7ce53e418b5c1343a84a084ecefbd8f2c96"
+  integrity sha512-VjkA+a/aPsgtpZJxkNrlIB3Qzn17rgSsBrKp/QAqcySWm4uZfQzOe2HD6kJPHWQuhMW14sii/I2EVvyDFqWHAA==
   dependencies:
     "@coinbase/wallet-sdk" "3.7.2"
     "@emotion/react" "11.11.4"
@@ -5358,7 +5358,7 @@ thirdweb@0.0.0-dev-210c8de7c6b6b9c372cbfea449fc11cd76413168-20240320001036:
     mipd "0.0.5"
     node-libs-browser "2.2.1"
     uqr "0.1.2"
-    viem "2.7.19"
+    viem "2.8.14"
 
 thread-stream@^0.15.1:
   version "0.15.2"
@@ -5674,10 +5674,10 @@ valtio@1.11.2:
     proxy-compare "2.5.1"
     use-sync-external-store "1.2.0"
 
-viem@2.7.19:
-  version "2.7.19"
-  resolved "https://registry.yarnpkg.com/viem/-/viem-2.7.19.tgz#fa6bd8f46df2f0332e5ca6d116772dff6f161a72"
-  integrity sha512-UOMeqy+8p2709ra2j9HEOL1NfjsXZzlJ8gwR6YO/zXH8KIZvyzW07t4iQARF5+ShVZ/7+/1ec8oPjVi1M//33A==
+viem@2.8.14:
+  version "2.8.14"
+  resolved "https://registry.yarnpkg.com/viem/-/viem-2.8.14.tgz#25b7e9488f494b0b20124fdeefd96b65d851850a"
+  integrity sha512-K5u9OoyPQ7W8VPa6xY2m7oazuhemp0xuK9Ur8AkaXHtcusism9keTXDDaCw6WWFK3YR9HSojHJOtuVQqvRz0ug==
   dependencies:
     "@adraffy/ens-normalize" "1.10.0"
     "@noble/curves" "1.2.0"
