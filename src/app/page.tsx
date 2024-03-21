@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ConnectButton } from "@/app/thirdweb";
 import thirdwebIcon from "@public/thirdweb.svg";
+import { client } from "./client";
 
 export default function Home() {
   return (
@@ -9,7 +10,13 @@ export default function Home() {
         <Header />
 
         <div className="flex justify-center mb-20">
-          <ConnectButton />
+          <ConnectButton
+            client={client}
+            appMetadata={{
+              name: "Example App",
+              url: "https://example.com",
+            }}
+          />
         </div>
 
         <ThirdwebResources />
