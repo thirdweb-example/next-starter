@@ -31,6 +31,7 @@ export default function Page() {
         {account && (
           <div className="flex justify-center">
             <button
+              key="sign-in"
               className="bg-white text-black font-semibold px-3 py-2 rounded"
               disabled={isSigning}
               onClick={async () => {
