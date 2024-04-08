@@ -21,6 +21,6 @@ export const GET = async () => {
     return Response.json({ result });
   } catch (error) {
     console.log("error", error);
-    return Response.json({ error: error.message });
+    return Response.json({ error });
   }
 };

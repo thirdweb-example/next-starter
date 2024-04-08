@@ -37,9 +37,14 @@ export function KadoQuote() {
       url.searchParams.set("transactionType", "buy");
       url.searchParams.set("fiatMethod", "credit_card");
       url.searchParams.set("partner", "fortress");
-      url.searchParams.set("amount", (parseInt(amount) + 5).toString());
       url.searchParams.set("asset", "USDC");
+
+      // Modifiable
+      // Amount is in USD $40.10 = 40.1
+      url.searchParams.set("amount", (parseInt(amount) + 5).toString());
+      // Same endpoint
       url.searchParams.set("blockchain", "polygon");
+      // Currency I'll get to you
       url.searchParams.set("currency", "USD");
 
       const response = await fetch(url, {
