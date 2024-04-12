@@ -14,7 +14,7 @@ const clientId = "......";
 
 ## Usage with App Router
 
-If you are using App router, You can not import client components/hooks directly from `thirdweb/react` package directly in server components.
+If you are using App Router, You can not import client components/hooks directly from `thirdweb/react` package directly in server components.
 
 You should export them from the `src/thirdweb.ts` file instead which has been marked with `"use client"` directive at the top of the file so that Next.js can process it properly.
 
