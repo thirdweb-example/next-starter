@@ -15,8 +15,8 @@ dependencies:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
   thirdweb:
-    specifier: 0.0.0-dev-ad956e06b8eb3196d9d64552e4587f24aa211ebe-20240418170440
-    version: 0.0.0-dev-ad956e06b8eb3196d9d64552e4587f24aa211ebe-20240418170440(@types/react-dom@18.2.23)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3)
+    specifier: 0.0.0-dev-c65f932bd535968273285c973d8be24bd84c19d0-20240418205836
+    version: 0.0.0-dev-c65f932bd535968273285c973d8be24bd84c19d0-20240418205836(@types/react-dom@18.2.23)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3)
 
 devDependencies:
   '@types/node':
@@ -1675,13 +1675,6 @@ packages:
       - uWebSockets.js
     dev: false
 
-  /@walletconnect/logger@2.1.0:
-    resolution: {integrity: sha512-lyCRHlxlBHxvj1fJXa2YOW4whVNucPKF7Oc0D1UvYhfArpIIjlJJiTe5cLm8g4ZH4z5lKp14N/c9oRHlyv5v4A==}
-    dependencies:
-      '@walletconnect/safe-json': 1.0.2
-      pino: 7.11.0
-    dev: false
-
   /@walletconnect/logger@2.1.2:
     resolution: {integrity: sha512-aAb28I3S6pYXZHQm5ESB+V6rDqIYfsnHaQyzFbwUUBFY4H0OXx/YtTl8lvhUNhMMfb9UxbwEBS253TlXUYJWSw==}
     dependencies:
@@ -1789,7 +1782,7 @@ packages:
       '@walletconnect/heartbeat': 1.2.1
       '@walletconnect/jsonrpc-types': 1.0.3
       '@walletconnect/keyvaluestorage': 1.1.1
-      '@walletconnect/logger': 2.1.0
+      '@walletconnect/logger': 2.1.2
       events: 3.3.0
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -5656,8 +5649,8 @@ packages:
       any-promise: 1.3.0
     dev: true
 
-  /thirdweb@0.0.0-dev-ad956e06b8eb3196d9d64552e4587f24aa211ebe-20240418170440(@types/react-dom@18.2.23)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3):
-    resolution: {integrity: sha512-Ma4D8PmXZw84/u2NUsMROiKIBAxYpwQDsXDgu4N/+yPjSPMHfuCo9lkCOp8TCWn8Y8gy3uLNl322IXkWTp84fQ==}
+  /thirdweb@0.0.0-dev-c65f932bd535968273285c973d8be24bd84c19d0-20240418205836(@types/react-dom@18.2.23)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3):
+    resolution: {integrity: sha512-M0xGFp7qm9Gb118Sf9/nYazLT/AFvULhfC+V0Qhbu6YRVh/5Hj39/vLxrFosWSB8aQQEKzjgoArDHP9cUZMFqg==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
