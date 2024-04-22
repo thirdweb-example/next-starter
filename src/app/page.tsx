@@ -28,7 +28,7 @@ export default function Home() {
         <div className="flex justify-center mb-20">
           <ConnectButton
             client={client}
-            connectModal={{
+            detailsModal={{
               pay: {
                 fiat: {
                   testMode: true,
