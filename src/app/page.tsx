@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { ConnectButton } from "./thirdweb";
+import { ConnectButton, PayEmbed } from "./thirdweb";
 import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
 
 import { setThirdwebDomains } from "thirdweb/utils";
+import { defaultTokens, useActiveAccount } from "thirdweb/react";
 
 setThirdwebDomains({
   pay: "pay.thirdweb-dev.com",
@@ -14,30 +15,70 @@ setThirdwebDomains({
 });
 
 export default function Home() {
+  const account = useActiveAccount();
   return (
     <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
       <div className="py-20">
         <Header />
 
-        <div className="flex justify-center mb-20">
+        <div className="flex justify-center mb-10">
           <ConnectButton client={client} />
         </div>
 
         <div className="h-10" />
-        <h2 className="text-center mb-5"> Kado TestMode </h2>
+        <h2 className="text-center mb-5"> Stripe TestMode </h2>
 
-        <div className="flex justify-center mb-20">
+        <div className="flex justify-center mb-10">
           <ConnectButton
             client={client}
             detailsModal={{
               pay: {
-                fiat: {
+                buyWithFiat: {
                   testMode: true,
                 },
               },
             }}
           />
         </div>
+
+        {account && (
+          <>
+            <div className="h-10" />
+            <h2 className="text-center mb-5"> Pay Embed </h2>
+            <div className="flex justify-center ">
+              <div
+                style={{
+                  width: "360px",
+                }}
+              >
+                <PayEmbed
+                  client={client}
+                  supportedTokens={defaultTokens}
+                  theme="dark"
+                />
+              </div>
+            </div>
+
+            <div className="h-14" />
+            <h2 className="text-center mb-5"> Pay Embed (Stripe Testmode) </h2>
+            <div className="flex justify-center ">
+              <div
+                style={{
+                  width: "360px",
+                }}
+              >
+                <PayEmbed
+                  client={client}
+                  supportedTokens={defaultTokens}
+                  theme="dark"
+                  buyWithFiat={{
+                    testMode: true,
+                  }}
+                />
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </main>
   );
