@@ -5,8 +5,31 @@ import { ConnectButton, PayEmbed } from "./thirdweb";
 import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
 
-import { setThirdwebDomains } from "thirdweb/utils";
-import { defaultTokens, useActiveAccount } from "thirdweb/react";
+import { setThirdwebDomains, toWei } from "thirdweb/utils";
+import {
+  defaultTokens,
+  useActiveAccount,
+  useActiveWalletChain,
+  useSendTransaction,
+  useSwitchActiveWalletChain,
+} from "thirdweb/react";
+import { useState } from "react";
+import {
+  type Chain,
+  prepareTransaction,
+  waitForReceipt,
+  getContract,
+} from "thirdweb";
+import {
+  polygon,
+  ethereum,
+  optimism,
+  base,
+  arbitrum,
+  avalanche,
+} from "thirdweb/chains";
+import { transfer } from "thirdweb/extensions/erc20";
+import { useMutation } from "@tanstack/react-query";
 
 setThirdwebDomains({
   pay: "pay.thirdweb-dev.com",
@@ -77,6 +100,27 @@ export default function Home() {
                 />
               </div>
             </div>
+
+            <div className="my-16" />
+
+            <div className="flex justify-center">
+              <div className="w-[400px]">
+                <h2 className="text-xl mb-2"> Send Native Tokens </h2>
+                <SendNativeFundsTest />
+              </div>
+            </div>
+
+            <div className="my-16" />
+
+            <div className="flex justify-center">
+              <div className="w-[400px]">
+                <h2 className="text-xl mb-2">
+                  {" "}
+                  Send Native Tokens (Stripe Test Mode){" "}
+                </h2>
+                <SendNativeFundsTest testMode={true} />
+              </div>
+            </div>
           </>
         )}
       </div>
@@ -110,5 +154,172 @@ function Header() {
         file to get started.
       </p>
     </header>
+  );
+}
+
+const chainOptions = [polygon, ethereum, optimism, base, arbitrum, avalanche];
+
+function SendNativeFundsTest(props: { testMode?: boolean }) {
+  const [tokenAmount, setTokenAmount] = useState("0");
+  const [toAddress, setToAddress] = useState("");
+
+  const [chain, setChain] = useState<Chain>(chainOptions[0]);
+  const activeChain = useActiveWalletChain();
+  const switchChain = useSwitchActiveWalletChain();
+  const sendTx = useSendToken(props.testMode);
+
+  return (
+    <div>
+      <FormInput
+        value={tokenAmount}
+        setValue={setTokenAmount}
+        id="tokenAmount"
+        label="Amount"
+        placeholder="0.0"
+      />
+      <FormInput
+        value={toAddress}
+        setValue={setToAddress}
+        id="toAddress"
+        label="Send To"
+        placeholder="0x123..."
+      />
+
+      <div>
+        <label htmlFor={"chain"} className="mb-2 block">
+          {" "}
+          Network{" "}
+        </label>
+        <select
+          className="block p-3 border border-zinc-800 rounded-lg bg-zinc-900 text-zinc-100 w-full mb-4"
+          id={"chain"}
+          value={chain.id}
+          onChange={(e) => {
+            const chainId = e.target.value;
+            const chain = chainOptions.find((c) => String(c.id) === chainId);
+            if (chain) {
+              setChain(chain);
+            } else {
+              setChain(chainOptions[0]);
+            }
+          }}
+        >
+          {chainOptions.map((chain) => (
+            <option key={chain.id} value={chain.id}>
+              {chain.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {activeChain?.id === chain.id ? (
+        <button
+          type="button"
+          className="bg-zinc-300 px-3 py-3 rounded-lg text-zinc-900 block w-full font-semibold"
+          onClick={async () => {
+            console.log("in progress....");
+            await sendTx.mutateAsync({
+              amount: tokenAmount,
+              receiverAddress: toAddress,
+            });
+            console.log("sent");
+          }}
+        >
+          {sendTx.isPending ? "Sending..." : "Send Token"}
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="bg-zinc-300 px-3 py-3 rounded-lg text-zinc-900 block w-full font-semibold"
+          onClick={async () => {
+            await switchChain(chain);
+          }}
+        >
+          Switch Network
+        </button>
+      )}
+    </div>
+  );
+}
+
+function useSendToken(testMode?: boolean) {
+  const sendTransaction = useSendTransaction({
+    payModal: {
+      buyWithFiat: {
+        testMode,
+      },
+    },
+  });
+  const activeChain = useActiveWalletChain();
+
+  return useMutation({
+    async mutationFn(option: {
+      tokenAddress?: string;
+      receiverAddress: string;
+      amount: string;
+    }) {
+      const { tokenAddress, receiverAddress, amount } = option;
+      if (!activeChain) {
+        throw new Error("No active chain");
+      }
+
+      // native token transfer
+      if (!tokenAddress) {
+        const sendNativeTokenTx = prepareTransaction({
+          chain: activeChain,
+          client,
+          to: receiverAddress,
+          value: toWei(amount),
+        });
+
+        const txHash = await sendTransaction.mutateAsync(sendNativeTokenTx);
+        await waitForReceipt(txHash);
+      }
+
+      // erc20 token transfer
+      else {
+        const contract = getContract({
+          address: tokenAddress,
+          client,
+          chain: activeChain,
+        });
+
+        const tx = transfer({
+          amount,
+          contract,
+          to: receiverAddress,
+        });
+
+        const txHash = await sendTransaction.mutateAsync(tx);
+        await waitForReceipt(txHash);
+      }
+    },
+  });
+}
+
+function FormInput(props: {
+  value: string;
+  setValue: (value: string) => void;
+  id: string;
+  label: string;
+  placeholder: string;
+}) {
+  return (
+    <div>
+      <label htmlFor={props.id} className="mb-2 block">
+        {" "}
+        {props.label}
+      </label>
+      <input
+        className="block p-3 border border-zinc-800 rounded-lg bg-zinc-900 text-zinc-100 w-full mb-4"
+        id={props.id}
+        type="text"
+        value={props.value}
+        onChange={(e) => {
+          props.setValue(e.target.value);
+        }}
+        placeholder={props.placeholder}
+      />
+    </div>
   );
 }
