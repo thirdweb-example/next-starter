@@ -94,8 +94,10 @@ export default function Home() {
                   client={client}
                   supportedTokens={defaultTokens}
                   theme="dark"
-                  buyWithFiat={{
-                    testMode: true,
+                  payOptions={{
+                    buyWithFiat: {
+                      testMode: true,
+                    },
                   }}
                 />
               </div>
