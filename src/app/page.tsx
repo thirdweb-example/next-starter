@@ -1,13 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { ConnectButton, PayEmbed } from "./thirdweb";
-import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
 
-import { setThirdwebDomains, toWei } from "thirdweb/utils";
+import { toWei } from "thirdweb/utils";
 import {
-  defaultTokens,
   useActiveAccount,
   useActiveWallet,
   useActiveWalletChain,
@@ -33,11 +30,11 @@ import {
 import { transfer } from "thirdweb/extensions/erc20";
 import { useMutation } from "@tanstack/react-query";
 
-setThirdwebDomains({
-  pay: "pay.thirdweb-dev.com",
-  rpc: "rpc.thirdweb-dev.com",
-  inAppWallet: "embedded-wallet.thirdweb-dev.com",
-});
+// setThirdwebDomains({
+//   pay: "pay.thirdweb-dev.com",
+//   rpc: "rpc.thirdweb-dev.com",
+//   inAppWallet: "embedded-wallet.thirdweb-dev.com",
+// });
 
 export default function Home() {
   const account = useActiveAccount();
@@ -51,28 +48,11 @@ export default function Home() {
           Fiat Onramp Test
         </h2>
 
-        {account ? (
-          <>
-            <div className="flex justify-center">
-              <button
-                className="bg-zinc-300 px-3 py-2 rounded-lg text-zinc-900 font-semibold"
-                onClick={() => {
-                  if (activeWallet) {
-                    disconnect(activeWallet);
-                  }
-                }}
-              >
-                disconnect
-              </button>
-            </div>
-            <div className="h-5" />
-            <TestingSetup />
-          </>
-        ) : (
-          <div className="flex justify-center mb-10">
-            <ConnectButton client={client} />
-          </div>
-        )}
+        <div className="flex justify-center mb-10">
+          <ConnectButton client={client} />
+        </div>
+
+        <TestingSetup />
       </div>
     </main>
   );
