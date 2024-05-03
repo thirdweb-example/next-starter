@@ -18,8 +18,8 @@ dependencies:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
   thirdweb:
-    specifier: 0.0.0-dev-aeb912c1ebe9ab9b724e1cab593aa16bbd684057-20240503003620
-    version: 0.0.0-dev-aeb912c1ebe9ab9b724e1cab593aa16bbd684057-20240503003620(@types/react-dom@18.2.23)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3)
+    specifier: 0.0.0-dev-6f046e371b23b299584ec5f4f11c51f0716c5c17-20240503011814
+    version: 0.0.0-dev-6f046e371b23b299584ec5f4f11c51f0716c5c17-20240503011814(@types/react-dom@18.2.23)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3)
 
 devDependencies:
   '@types/node':
@@ -5322,8 +5322,8 @@ packages:
       any-promise: 1.3.0
     dev: true
 
-  /thirdweb@0.0.0-dev-aeb912c1ebe9ab9b724e1cab593aa16bbd684057-20240503003620(@types/react-dom@18.2.23)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3):
-    resolution: {integrity: sha512-FgjO9zg1yvxKqiAaAenoqFijsYbbQjt+1mymNX1+w/743Su+n3M+AKEDg46j61PZFaeFyL2/aqBq9GFbwwkTVA==}
+  /thirdweb@0.0.0-dev-6f046e371b23b299584ec5f4f11c51f0716c5c17-20240503011814(@types/react-dom@18.2.23)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.3):
+    resolution: {integrity: sha512-43fKgF71lH3CQbXnILtKB0q6zLto1Jhq2M16zOv+V69vryx9+eK0EKCslCvS1rwuLBEd4P8Vc/w58MPGGzHYCA==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
