@@ -9,7 +9,9 @@ import { setThirdwebDomains, toWei } from "thirdweb/utils";
 import {
   defaultTokens,
   useActiveAccount,
+  useActiveWallet,
   useActiveWalletChain,
+  useDisconnect,
   useSendTransaction,
   useSwitchActiveWalletChain,
 } from "thirdweb/react";
@@ -39,123 +41,132 @@ setThirdwebDomains({
 
 export default function Home() {
   const account = useActiveAccount();
+  const { disconnect } = useDisconnect();
+  const activeWallet = useActiveWallet();
+
   return (
-    <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
+    <main className="p-4 pb-10 min-h-[100vh] flex justify-center container max-w-screen-lg mx-auto">
       <div className="py-20">
-        <Header />
+        <h2 className="text-center font-semibold text-4xl mb-10">
+          Fiat Onramp Test
+        </h2>
 
-        <div className="flex justify-center mb-10">
-          <ConnectButton client={client} />
-        </div>
-
-        <div className="h-10" />
-        <h2 className="text-center mb-5"> Stripe TestMode </h2>
-
-        <div className="flex justify-center mb-10">
-          <ConnectButton
-            client={client}
-            detailsModal={{
-              pay: {
-                buyWithFiat: {
-                  testMode: true,
-                },
-              },
-            }}
-          />
-        </div>
-
-        {account && (
+        {account ? (
           <>
-            <div className="h-10" />
-            <h2 className="text-center mb-5"> Pay Embed </h2>
-            <div className="flex justify-center ">
-              <div
-                style={{
-                  width: "360px",
+            <div className="flex justify-center">
+              <button
+                className="bg-zinc-300 px-3 py-2 rounded-lg text-zinc-900 font-semibold"
+                onClick={() => {
+                  if (activeWallet) {
+                    disconnect(activeWallet);
+                  }
                 }}
               >
-                <PayEmbed
-                  client={client}
-                  supportedTokens={defaultTokens}
-                  theme="dark"
-                />
-              </div>
+                disconnect
+              </button>
             </div>
-
-            <div className="h-14" />
-            <h2 className="text-center mb-5"> Pay Embed (Stripe Testmode) </h2>
-            <div className="flex justify-center ">
-              <div
-                style={{
-                  width: "360px",
-                }}
-              >
-                <PayEmbed
-                  client={client}
-                  supportedTokens={defaultTokens}
-                  theme="dark"
-                  payOptions={{
-                    buyWithFiat: {
-                      testMode: true,
-                    },
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="my-16" />
-
-            <div className="flex justify-center">
-              <div className="w-[400px]">
-                <h2 className="text-xl mb-2"> Send Native Tokens </h2>
-                <SendNativeFundsTest />
-              </div>
-            </div>
-
-            <div className="my-16" />
-
-            <div className="flex justify-center">
-              <div className="w-[400px]">
-                <h2 className="text-xl mb-2">
-                  {" "}
-                  Send Native Tokens (Stripe Test Mode){" "}
-                </h2>
-                <SendNativeFundsTest testMode={true} />
-              </div>
-            </div>
+            <div className="h-5" />
+            <TestingSetup />
           </>
+        ) : (
+          <div className="flex justify-center mb-10">
+            <ConnectButton client={client} />
+          </div>
         )}
       </div>
     </main>
   );
 }
 
-function Header() {
+function TestingSetup() {
+  const [tab, setTab] = useState<"pay-embed" | "send" | "modal">("modal");
+  const [testMode, setTestMode] = useState(false);
+
   return (
-    <header className="flex flex-col items-center mb-20 md:mb-20">
-      <Image
-        src={thirdwebIcon}
-        alt=""
-        className="size-[150px] md:size-[150px]"
-        style={{
-          filter: "drop-shadow(0px 0px 24px #a726a9a8)",
-        }}
-      />
+    <div>
+      <div className="flex flex-col items-center mb-10 gap-2">
+        <p> Stripe Test Mode: {testMode ? "enabled" : "disabled"}</p>
+        <button
+          className="bg-zinc-300 px-3 py-2 rounded-lg text-zinc-900 font-semibold"
+          onClick={() => {
+            setTestMode((prev) => !prev);
+          }}
+        >
+          Toggle TestMode
+        </button>
+      </div>
 
-      <h1 className="text-2xl md:text-6xl font-semibold md:font-bold tracking-tighter mb-6 text-zinc-100">
-        thirdweb SDK
-        <span className="text-zinc-300 inline-block mx-1"> + </span>
-        <span className="inline-block -skew-x-6 text-blue-500"> Next.js </span>
-      </h1>
+      {/* Tabs  */}
+      <div className="flex gap-2 justify-center mb-10">
+        {["modal", "pay-embed", "send"].map((t) => {
+          return (
+            <button
+              key={t}
+              onClick={() => {
+                setTab(t as any);
+              }}
+              className={
+                (tab === t
+                  ? "bg-zinc-100 text-zinc-900"
+                  : "bg-zinc-900 border border-zinc-800") +
+                " p-2 rounded-lg font-semibold"
+              }
+            >
+              {t}
+            </button>
+          );
+        })}
+      </div>
 
-      <p className="text-zinc-300 text-base">
-        Read the{" "}
-        <code className="bg-zinc-800 text-zinc-300 px-2 rounded py-1 text-sm mx-1">
-          README.md
-        </code>{" "}
-        file to get started.
-      </p>
-    </header>
+      {tab === "modal" && (
+        <>
+          <div className="flex justify-center mb-10">
+            <ConnectButton
+              client={client}
+              detailsModal={{
+                pay: {
+                  buyWithFiat: {
+                    testMode: testMode,
+                  },
+                },
+              }}
+            />
+          </div>
+        </>
+      )}
+
+      {tab === "pay-embed" && (
+        <>
+          <div className="flex justify-center ">
+            <div
+              style={{
+                width: "360px",
+              }}
+            >
+              <PayEmbed
+                client={client}
+                payOptions={{
+                  buyWithFiat: {
+                    testMode: testMode,
+                  },
+                }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {tab === "send" && (
+        <>
+          <div className="flex justify-center">
+            <div className="w-[400px]">
+              <h2 className="text-xl mb-2"> Send Native Tokens </h2>
+              <SendNativeFundsTest testMode={testMode} />
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 
