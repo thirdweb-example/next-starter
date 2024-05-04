@@ -3,7 +3,7 @@
 import { ConnectButton, PayEmbed } from "./thirdweb";
 import { client } from "./client";
 
-import { toWei } from "thirdweb/utils";
+import { setThirdwebDomains, toWei } from "thirdweb/utils";
 import {
   useActiveAccount,
   useActiveWallet,
