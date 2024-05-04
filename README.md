@@ -12,18 +12,6 @@ Go to `src/client.ts` file and replace the placeholder `clientId` with your clie
 const clientId = "......";
 ```
 
-## Usage with App Router
-
-If you are using App Router, You can not import client components/hooks directly from `thirdweb/react` package directly in server components.
-
-You should export them from the `src/thirdweb.ts` file instead which has been marked with `"use client"` directive at the top of the file so that Next.js can process it properly.
-
-```ts
-// server component
-import { ThirdwebProvider } from "thirdweb/react"; // ❌
-import { ThirdwebProvider } from "@/app/thirdweb"; // ✅
-```
-
 ## Usage
 
 ### Install dependencies
