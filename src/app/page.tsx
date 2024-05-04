@@ -3,7 +3,7 @@
 import { ConnectButton, PayEmbed } from "./thirdweb";
 import { client } from "./client";
 
-import { setThirdwebDomains, toWei } from "thirdweb/utils";
+import { toWei } from "thirdweb/utils";
 import {
   useActiveAccount,
   useActiveWallet,
@@ -29,12 +29,6 @@ import {
 } from "thirdweb/chains";
 import { transfer } from "thirdweb/extensions/erc20";
 import { useMutation } from "@tanstack/react-query";
-
-setThirdwebDomains({
-  pay: "pay.thirdweb-dev.com",
-  rpc: "rpc.thirdweb-dev.com",
-  inAppWallet: "embedded-wallet.thirdweb-dev.com",
-});
 
 export default function Home() {
   const account = useActiveAccount();
