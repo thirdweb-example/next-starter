@@ -3,12 +3,9 @@
 import { ConnectButton, PayEmbed } from "./thirdweb";
 import { client } from "./client";
 
-import { toWei } from "thirdweb/utils";
+import { setThirdwebDomains, toWei } from "thirdweb/utils";
 import {
-  useActiveAccount,
-  useActiveWallet,
   useActiveWalletChain,
-  useDisconnect,
   useSendTransaction,
   useSwitchActiveWalletChain,
 } from "thirdweb/react";
@@ -30,11 +27,13 @@ import {
 import { transfer } from "thirdweb/extensions/erc20";
 import { useMutation } from "@tanstack/react-query";
 
-export default function Home() {
-  const account = useActiveAccount();
-  const { disconnect } = useDisconnect();
-  const activeWallet = useActiveWallet();
+setThirdwebDomains({
+  pay: "pay.thirdweb-dev.com",
+  rpc: "rpc.thirdweb-dev.com",
+  inAppWallet: "embedded-wallet.thirdweb-dev.com",
+});
 
+export default function Home() {
   return (
     <main className="p-4 pb-10 min-h-[100vh] flex justify-center container max-w-screen-lg mx-auto">
       <div className="py-20">

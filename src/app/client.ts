@@ -9,5 +9,5 @@ import { createThirdwebClient } from "thirdweb";
 // }
 
 export const client = createThirdwebClient({
-  clientId: "1119b624529e89514e1c40c700af849c", // prod key
+  clientId: "48812987432f90bb6bd9f9f1effda872", // dev test key
 });
