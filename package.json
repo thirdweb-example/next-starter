@@ -12,7 +12,7 @@
     "react": "^18",
     "react-dom": "^18",
     "next": "14.1.0",
-    "thirdweb": "0.0.0-dev-e6be59100c0afcf655610ff69d2c903047e05578-20240507001800",
+    "thirdweb": "0.0.0-dev-302aaf3163e1fba4fca33bbc2ccee92e59b1e24d-20240507154555",
     "@tanstack/react-query": "^5.29.2"
   },
   "devDependencies": {
