@@ -2,13 +2,8 @@
 
 import { ConnectButton, PayEmbed } from "./thirdweb";
 import { client } from "./client";
-import { toWei } from "thirdweb/utils";
-import {
-  useActiveWalletChain,
-  useSendTransaction,
-  useSwitchActiveWalletChain,
-  setThirdwebDomains,
-} from "thirdweb/react";
+import { toWei, setThirdwebDomains } from "thirdweb/utils";
+import { useActiveWalletChain, useSendTransaction } from "thirdweb/react";
 import { useState } from "react";
 import {
   type Chain,
