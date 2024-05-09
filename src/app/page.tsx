@@ -1,7 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import { ConnectButton } from "thirdweb/react";
 import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
+import { setThirdwebDomains } from "thirdweb/utils";
+
+setThirdwebDomains({
+  pay: "pay.thirdweb-dev.com",
+  rpc: "rpc.thirdweb-dev.com",
+  inAppWallet: "in-app-wallet.thirdweb-dev.com",
+});
 
 export default function Home() {
   return (
