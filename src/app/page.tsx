@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ConnectButton } from "thirdweb/react";
 import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
-import { inAppWallet } from "thirdweb/wallets";
+import { createWallet, inAppWallet } from "thirdweb/wallets";
 
 const wallets = [
   inAppWallet({
@@ -15,6 +15,8 @@ const wallets = [
       },
     },
   }),
+  createWallet("io.metamask"),
+  createWallet("com.coinbase.wallet"),
 ];
 
 export default function Home() {
@@ -24,17 +26,20 @@ export default function Home() {
         <Header />
 
         <div className="flex justify-center text-center font-semibold mb-20">
-          <ConnectButton
-            client={client}
-            wallets={wallets}
-            connectModal={{
-              size: "compact",
-            }}
-            appMetadata={{
-              name: "Example App",
-              url: "https://example.com",
-            }}
-          />
+          <div className="flex flex-col gap-2">
+            Compact
+            <ConnectButton
+              client={client}
+              wallets={wallets}
+              connectModal={{
+                size: "compact",
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            Wide
+            <ConnectButton client={client} wallets={wallets} />
+          </div>
         </div>
 
         <ThirdwebResources />
