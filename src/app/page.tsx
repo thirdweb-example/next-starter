@@ -1,7 +1,21 @@
+"use client";
 import Image from "next/image";
 import { ConnectButton } from "thirdweb/react";
 import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
+import { inAppWallet } from "thirdweb/wallets";
+
+const wallets = [
+  inAppWallet({
+    metadata: {
+      image: {
+        src: "https://i.ibb.co/Tvz9zxV/Git-Hub-Logo-White.png",
+        alt: "Git-Hub-Logo-White",
+        height: 80,
+      },
+    },
+  }),
+];
 
 export default function Home() {
   return (
@@ -9,9 +23,13 @@ export default function Home() {
       <div className="py-20">
         <Header />
 
-        <div className="flex justify-center mb-20">
+        <div className="flex justify-center text-center font-semibold mb-20">
           <ConnectButton
             client={client}
+            wallets={wallets}
+            connectModal={{
+              size: "compact",
+            }}
             appMetadata={{
               name: "Example App",
               url: "https://example.com",
