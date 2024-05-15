@@ -25,7 +25,7 @@ export default function Home() {
       <div className="py-20">
         <Header />
 
-        <div className="flex justify-center text-center font-semibold mb-20">
+        <div className="flex justify-center text-center gap-8 font-semibold mb-20">
           <div className="flex flex-col gap-2">
             Compact
             <ConnectButton
