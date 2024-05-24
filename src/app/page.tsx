@@ -96,7 +96,7 @@ function TestingSetup() {
             <ConnectButton
               client={client}
               detailsModal={{
-                pay: {
+                payOptions: {
                   buyWithFiat: {
                     testMode: testMode,
                   },
