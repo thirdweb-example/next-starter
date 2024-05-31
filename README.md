@@ -1,16 +1,17 @@
-# thirdweb SDK + Next.js starter
 
-## Setup client id
+![tw-banner](https://github.com/thirdweb-example/next-starter/assets/57885104/20c8ce3b-4e55-4f10-ae03-2fe4743a5ee8)
 
-Before you start, you need to replace the placeholder `clientId` with your client ID to use thirdweb SDK.
+# thirdweb-next-starter
 
-Refer to [Creating a client](https://portal.thirdweb.com/typescript/v5/client) guide to see how you can get a client id.
+Starter template to build an onchain react native app with [thirdweb](https://thirdweb.com/) and [next](https://nextjs.org/).
 
-Go to `src/client.ts` file and replace the placeholder `clientId` with your client ID.
+## Environment Variables
 
-```ts
-const clientId = "......";
-```
+To run this project, you will need to add the following environment variables to your .env file:
+
+`CLIENT_ID`
+
+To learn how to create a client ID, refer to the [client documentation](https://portal.thirdweb.com/typescript/v5/client). 
 
 ## Usage
 
