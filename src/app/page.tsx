@@ -1,8 +1,8 @@
 "use client";
 
+import thirdwebIcon from "@public/thirdweb.svg";
 import Image from "next/image";
 import { ConnectButton } from "thirdweb/react";
-import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
 
 export default function Home() {
