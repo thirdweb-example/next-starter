@@ -1,5 +1,5 @@
 {
-  "name": "next-starter-v5",
+  "name": "yummy-zamn-nft",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,17 +10,12 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.87.4",
-    "ethers": "^6.15.0",
-    "next": "^15.5.2",
+    "next": "15.4.6",
     "react": "19.1.1",
     "react-dom": "19.1.1",
-    "thirdweb": "^5",
-    "viem": "^2.37.5",
-    "wagmi": "^2.16.9"
+    "thirdweb": "^5"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.4",
     "@types/node": "^20",
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
