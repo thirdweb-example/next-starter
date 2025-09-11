@@ -2,11 +2,19 @@
 
 import thirdwebIcon from "@public/thirdweb.svg";
 import Image from "next/image";
-import { ConnectButton } from "thirdweb/react";
-import { client } from "./client";
-import { useActiveAccount, useContract, useSendTransaction, useTokenBalance } from "thirdweb/react";
+import { 
+  ConnectButton,
+  useActiveAccount,
+  useContract,
+  useSendTransaction,
+  useTokenBalance,
+  useMarketplace,
+  useListings,
+  useNFTDrop,
+  useOwnedNFTs
+} from "thirdweb/react";
 import { useState, useEffect } from "react";
-import { useMarketplace, useListings, useNFTDrop, useOwnedNFTs, PayButton } from "@thirdweb-dev/react";
+import { client } from "./client";
 
 // Add your supported tokens here
 const TOKENS = [
@@ -24,8 +32,17 @@ const TOKENS = [
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <h1 className="text-3xl font-bold">Hello, world!</h1>
+    <main className="flex flex-col min-h-screen items-center justify-center p-4 gap-8">
+      <Header />
+      <ConnectButton client={client} />
+      <CyberfamMembership />
+      <PlatinumMembership />
+      <FemprenoirAccess />
+      <MintFromDrop />
+      <ListNFTForSale />
+      <MarketplaceListings />
+      <MyNFTs />
+      <ThirdwebResources />
     </main>
   );
 }
@@ -306,17 +323,6 @@ function MintFromDrop() {
       >
         {isMinting ? `Minting...` : `Mint ${quantity} NFT${quantity > 1 ? "s" : ""}`}
       </button>
-      <div className="mt-2">
-        <PayButton
-          client={client}
-          contractAddress={dropAddress}
-          quantity={quantity}
-          onSuccess={(result) => setTx(result.transactionHash)}
-          onError={(error) => setError(error.message)}
-        >
-          Buy with Card / Fiat
-        </PayButton>
-      </div>
       {tx && (
         <p className="mt-2 text-green-400 text-sm">
           Minted! Tx:{" "}
@@ -502,9 +508,6 @@ function PlatinumMembership() {
     </div>
   );
 }
-
-import { useContract, useOwnedNFTs } from "@thirdweb-dev/react";
-
 function FemprenoirAccess() {
   const femContract = useContract("0x4749cEE5b75a8303aC3D2AF46d673785b6aD7Aa", "edition");
   const account = useActiveAccount();
@@ -543,11 +546,6 @@ function MyNFTs() {
       <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
         {nfts.map(nft => (
           <div key={nft.metadata.id} className="border p-2 rounded">
-    <div className="my-8">
-      <h3 className="font-bold mb-2">My NFTs</h3>
-      <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-        {nfts.map(nft => (
-          <div key={nft.metadata.id} className="border p-2 rounded">
             <div>{nft.metadata.name || `NFT #${nft.metadata.id}`}</div>
             {nft.metadata.image && (
               <img src={nft.metadata.image} alt={nft.metadata.name} width={80} />
@@ -558,3 +556,5 @@ function MyNFTs() {
     </div>
   );
 }
+
+// TODO: Add a Buy with Card / Fiat button here using Paper.xyz, Crossmint, or Stripe
