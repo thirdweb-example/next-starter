@@ -19,7 +19,9 @@ import {
 import {
   ConnectButton,
   useActiveAccount,
+  useActiveWalletChain,
   useSendAndConfirmTransaction,
+  useSwitchActiveWalletChain,
 } from "thirdweb/react";
 import { isAddress, maxUint256 } from "thirdweb/utils";
 import { z } from "zod";
@@ -252,6 +254,9 @@ export default function Home() {
   }
 
   const activeAccount = useActiveAccount();
+  const activeChain = useActiveWalletChain();
+  const switchChain = useSwitchActiveWalletChain();
+
   const totalBatches = Math.ceil(
     (csvInput.type === "success" ? csvInput.data.length : 0) / batchSize,
   );
@@ -334,7 +339,7 @@ export default function Home() {
                     )}
                   />
 
-                  {!activeAccount ? (
+                  {!activeAccount || !activeChain ? (
                     <ConnectButton
                       client={client}
                       connectButton={{
@@ -342,6 +347,16 @@ export default function Home() {
                         label: "Connect Wallet to continue",
                       }}
                     />
+                  ) : activeChain.id !== form.watch("chainId") ? (
+                    <Button
+                      type="button"
+                      className="w-full"
+                      onClick={() => {
+                        switchChain(defineChain(form.getValues().chainId));
+                      }}
+                    >
+                      Switch Chain
+                    </Button>
                   ) : (
                     <Button type="submit" className="w-full">
                       Set Claim Conditions{" "}
